@@ -38,7 +38,10 @@ def add_clients():
 
     client = models.Client(name, cpf, car_board, status)
 
-    create_client(client)
+    try:
+        create_client(client)
+    except Exception as e:
+        print(e)
 
 
 # Local function to load all clients
@@ -53,12 +56,18 @@ def load_activated_clients():
 
 # Local function nto add vacancies
 def add_vacancies():
-    cpf = input("Informe o CPF: ")
+    while True:
+        try:
+            cpf = input("Informe o CPF: ")
 
-    client = [x for x in get_all_clients() if x.cpf == cpf]
+            client = [x for x in get_all_clients() if x.cpf == cpf]
 
-    if not client:
-        raise Exception('Nenhum CPF foi encontrado!')
+            if not client:
+                raise Exception('Nenhum cliente foi encontrado! Informe um CPF existente')
+        except Exception as e:
+            print(e)
+        else:
+            break
 
     create_vacancy(models.Vacancy(client))
 

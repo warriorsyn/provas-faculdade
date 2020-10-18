@@ -5,7 +5,7 @@ clients = []
 
 def create_client(client: models.Client):
     if any(x.cpf == client.cpf for x in clients):
-        raise ('Cliente com este cpf já cadastrado')
+        raise Exception('Cliente com este CPF já cadastrado!')
     clients.append(client)
 
 
