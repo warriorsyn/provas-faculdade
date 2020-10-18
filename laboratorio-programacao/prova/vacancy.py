@@ -5,7 +5,7 @@ vacancies = []
 
 def create_vacancy(vacancy: models.Vacancy):
     if len(vacancies) >= 20:
-        raise ('Cliente com este cpf já cadastrado')
+        raise Exception('Todas as vagas já foram preenchidas')
     vacancies.append(vacancy)
 
 

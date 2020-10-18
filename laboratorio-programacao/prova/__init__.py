@@ -19,16 +19,22 @@ menus = [
 # Local functions
 
 
-# Local functiob to add clients
+# Local function to add clients
 def add_clients():
-    # Utilizar o bloco try catch quando status diferente de ativo ou inativo e perfuntar novamente
     name = input("Insira o nome: ")
     cpf = input("Insira o CPF: ")
     car_board = input("Insira a placa do carro: ")
-    status = int(input("Insira o status: "))
 
-    # if status != Status.ACTIVE or status != Status.INACTIVE:
-    #     raise Exception("Insira um status valido (1 - ATIVO ou 2 - INATIVO)")
+    while True:
+        try:
+            status = int(input("Insira o status: "))
+
+            if status != models.Status.ACTIVE and status != models.Status.INACTIVE:
+                raise Exception('Insira um status valido (1 - ATIVO ou 2 - INATIVO)')
+        except Exception as e:
+            print(e)
+        else:
+            break
 
     client = models.Client(name, cpf, car_board, status)
 
@@ -52,7 +58,7 @@ def add_vacancies():
     client = [x for x in get_all_clients() if x.cpf == cpf]
 
     if not client:
-        raise ('Nenhum CPF foi encontrado!')
+        raise Exception('Nenhum CPF foi encontrado!')
 
     create_vacancy(models.Vacancy(client))
 
