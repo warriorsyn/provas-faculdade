@@ -1,3 +1,6 @@
+import json
+
+
 class Client:
     def __init__(self, name, cpf, board, status):
         self.name = name
@@ -13,6 +16,9 @@ class Client:
     def __repr__(self):
         return f"Nome: {self.name} CPF: {self.cpf} Placa:{self.board} Status:{self.get_status_name()}"
 
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
+
     def get_status_name(self):
         if self.status == Status.ACTIVE:
             return 'Ativo'
@@ -27,6 +33,9 @@ class Vacancy:
 
     def __str__(self):
         return f'{self.client}'
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
 
 
 class Status:

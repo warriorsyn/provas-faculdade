@@ -4,6 +4,7 @@ from clients import get_activated_clients, create_client, get_all_clients
 from vacancy import create_vacancy, get_vacancies
 
 # Main program
+
 # Local variables
 menus = [
     '1 - Cadastrar clientes',
@@ -17,7 +18,6 @@ menus = [
 # End local variables
 
 # Local functions
-
 
 # Local function to add clients
 def add_clients():
@@ -37,7 +37,6 @@ def add_clients():
             break
 
     client = models.Client(name, cpf, car_board, status)
-
     try:
         create_client(client)
     except Exception as e:
@@ -61,7 +60,6 @@ def add_vacancies():
             cpf = input("Informe o CPF: ")
 
             client = [x for x in get_all_clients() if x.cpf == cpf]
-
             if not client:
                 raise Exception('Nenhum cliente foi encontrado! Informe um CPF existente')
         except Exception as e:
@@ -69,10 +67,13 @@ def add_vacancies():
         else:
             break
 
-    create_vacancy(models.Vacancy(client))
+    try:
+        create_vacancy(models.Vacancy(client[0]))
+    except Exception as e:
+        print(e)
 
 
-# Local function to
+# Local function to load vacancies
 def load_vacancies():
     data = get_vacancies()
     print("=============================")
