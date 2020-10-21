@@ -18,7 +18,7 @@ def get_doctors_csv():
 def populate_doctor():
     for seed in doctor_csv:
         seed_split = seed.split(',')
-        doctor = Doctor(seed_split[0], seed_split[1], seed_split[2], seed_split[3],int( seed_split[4]))
+        doctor = Doctor(seed_split[0], seed_split[1], seed_split[2], seed_split[3], int(seed_split[4]))
         doctors.append(doctor)
 
 
@@ -36,6 +36,10 @@ def create_doctor(doctor: Doctor):
 
     doctor_data = f"{doctor.name},{doctor.cpf},{doctor.crm},{doctor.genre},{doctor.status}"
     add_doctor_to_file(doctor_data.split(','))
+
+
+def get_doctor_by_crm(crm):
+    return [x for x in doctors if x.crm == crm]
 
 
 def get_activated_doctors():

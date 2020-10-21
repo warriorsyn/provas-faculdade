@@ -38,6 +38,10 @@ def create_patient(patient: Patient):
     add_patient_to_file(patient_data.split(','))
 
 
+def get_patient_by_cpf(cpf):
+    return [x for x in patients if x.cpf == cpf]
+
+
 def get_patients():
     return patients
 
